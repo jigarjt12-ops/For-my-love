@@ -96,18 +96,7 @@
   </style>
 </head>
 
-<body><audio id="myMusic" loop>
-    <source src="https://od.lk/s/MTJfMjMyMzA3MTFf/song.MP3" type="audio/mpeg">
-</audio>
-<div class="lyrics-container">
-</div>
-<script>
-    // Unlocks and plays audio on the very first touch/click
-    document.addEventListener('click', function() {
-        const audio = document.getElementById('myMusic');
-        audio.play().catch(e => console.log("Audio waiting for user interaction."));
-    }, { once: true });
-
+<body>
 
   <h1>Hey beautiful 🌹✨</h1>
   <h2>
@@ -210,6 +199,6 @@
       }
     }, 190);
   </script>
-</script>
+
 </body>
 </html>
