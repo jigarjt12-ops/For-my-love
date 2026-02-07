@@ -55,6 +55,8 @@
       font-family: 'Baloo 2', cursive;
       white-space: nowrap;
       z-index: 2;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: none;
     }
 
     #yes {
@@ -129,7 +131,8 @@
     let noIndex = 0;
     let locked = false;
 
-    noBtn.addEventListener("mouseenter", () => {
+    function moveNoButton(e) {
+      if (e) e.preventDefault();
       if (locked) return;
 
       noBtn.innerText = noTexts[noIndex];
@@ -144,17 +147,21 @@
 
       noIndex++;
 
-      setTimeout(() => {
-        const maxX = container.clientWidth - noBtn.offsetWidth - 10;
-        const minY = 10;
-        const maxY =
-          container.clientHeight / 2 - noBtn.offsetHeight / 2;
+      const maxX = container.clientWidth - noBtn.offsetWidth - 10;
+      const minY = 10;
+      const maxY =
+        container.clientHeight / 2 - noBtn.offsetHeight / 2;
 
-        noBtn.style.left = Math.random() * maxX + "px";
-        noBtn.style.top =
-          minY + Math.random() * (maxY - minY) + "px";
-      }, 120);
-    });
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top =
+        minY + Math.random() * (maxY - minY) + "px";
+    }
+
+    /* Desktop */
+    noBtn.addEventListener("mouseenter", moveNoButton);
+
+    /* Mobile – instant on FIRST touch */
+    noBtn.addEventListener("touchstart", moveNoButton, { passive: false });
 
     yesBtn.addEventListener("click", () => {
       document.body.innerHTML = `
@@ -179,7 +186,6 @@
       `;
     });
 
-    /* 🌹 ROSE DAY BACKGROUND EMOJIS 🌹 */
     setInterval(() => {
       for (let i = 0; i < 2; i++) {
         const e = document.createElement("div");
